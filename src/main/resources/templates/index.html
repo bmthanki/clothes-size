@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Webname</title>
+<title>Size4Me</title>
 
 
 
@@ -85,6 +85,18 @@
 
 
 <script type="text/javascript">
+function someFunc() 
+    {
+    alert('Sorry, currently we have only female sizes. Male sizes are coming soon! =)'); 
+        
+    document.getElementById("Fema").checked = true;
+
+    }
+	function setCustomValidity()
+    {
+     var item= document.getElementByClassName('selectpicker');
+     var itemvalue= item.options[item.selectedIndex].text;
+    }
     function onSubmit(){
         var val={};
         JSON.stringify($('#basicBootstrapForm').serializeArray().map(function(x){val[x.name] = x.value;}));
@@ -97,15 +109,21 @@
             dataType : 'json',
             success : function(data) {
 	        		 console.log("response: "+JSON.stringify(data));
-        				    var tbl_body = "<tr><th><label class=\"control-label col-sm-2\">BRAND</label></th><br><br><th><label class=\"control-label col-sm-2\">SIZE</label></th></tr>";
-        				    var odd_even = false;
-        				        var tbl_row = "";
-        				        $.each(data, function(k , v) {
-        				            tbl_row += "<td class=\"control-label col-sm-2\">"+ v +"</td>";
-        				        })
-        				        tbl_body += "<tr class=\""+( odd_even ? "odd" : "even")+"\">"+tbl_row+"</tr>";
-        				        odd_even = !odd_even;
-        				    $("#tbody").html(tbl_body);
+	        		 var size=data.size;
+	        		 var tbl_body ="";
+        				
+        				if(size=="" || size=="null" || typeof size == 'undefined')
+        					{
+        					tbl_body ="<table width=\"100%\"><tr><th><font size= \"5\">NO SIZE FOUND</font></th></tr></table>";
+        					}
+        				else
+        					{
+        					$.each(data, function(k , v) {
+     				            tbl_body ="<table width=\"100%\"><tr><th><font size= \"5\">SIZE:</font></th><th><font size= \"10\">"+v+"</font></th></tr></table>";
+     				        })
+        					}
+        				  
+ 				       $("#tbody").html(tbl_body);
 	         }
         });
           
@@ -380,25 +398,22 @@
 						class="form-horizontal">
 
 						<div class="form-group">
-							<label class="control-label col-sm-2" for="gender">Gender:</label>
-
-
-
-
-
-
-							<label class="custom-control custom-radio">
-								&#160;&#160;&#160;&#160;&#160;&#160; <input name="gender"
-								type="radio" class="custom-control-input" required value="M"></input>
-								<span class="radio-inline"></span> <span
-								class="custom-control-description">Male</span>
-							</label> <label class="custom-control custom-radio">
-								&#160;&#160;&#160;&#160; <input name="gender" type="radio"
-								class="custom-control-input" required value="F"
-								checked="checked"></input> <span class="radio-inline"></span> <span
-								class="custom-control-description">Female</span>
-
-							</label>
+							<label class="control-label col-sm-4" for="gender"><font size= "4">GENDER:</font></label> &#160;
+            
+                  
+               <label class="custom-control custom-radio"> &#160;
+                    <input name="gender" type="radio" class="custom-control-input" required value="F" id="Fema" checked="checked">
+                    <span class="radio-inline"></span>
+                    <span class="custom-control-description" >FEMALE&#160;&#160;&#160;</span>
+                    
+                    </label>
+                 
+                  <label class="custom-control custom-radio">
+                   &#160;&#160;&#160;&#160;
+                    <input name="gender" type="radio" class="custom-control-input" required value="M" onclick="someFunc()" >
+                    <span class="radio-inline"></span>
+                    <span class="custom-control-description">MALE</span>
+             </label>
 
 
 							<!--
@@ -420,9 +435,9 @@
 						<!--  onchange="removeselect(this.value);"  -->
 
 						<div class="form-group">
-							<label class="control-label col-sm-2" for="brand">Brand:</label>
-							<div class="col-sm-2">
-								<select name="brand" id="brand" class="selectpicker"
+							<label class="control-label col-sm-4" for="brand"><font size= "4">OWN-A-BRAND:</font></label>
+							<div class="col-sm-5">
+								<select name="brand" id="brand" class="form-control"
 									data-live-search="false" data-live-search-style="begins"
 									title="Choose brand(s)" required onchange="removeselect(this.value);">
 									<option value="1">GAP</option>
@@ -434,7 +449,7 @@
 
 
 						<div class="form-group">
-							<label class="control-label col-sm-2" for="size">Size:</label>
+							<label class="control-label col-sm-4" for="size"><font size= "4">SIZE:</font></label>
 							<div class="col-sm-2">
 								<select name="size" id="size" class="form-control"
 									data-live-search="false" data-live-search-style="begins"
@@ -455,7 +470,7 @@
 
 
 						<!--  <div class="form-group">
-    <label class="control-label col-sm-2" for="style">Style:</label> 
+    <label class="control-label col-sm-3" for="style">Style:</label> 
       <div class="col-sm-2">             
       <select name="style" class="selectpicker" data-live-search="false" data-live-search-style="begins"  title="Choose style(s)" required> 
         <option>aa</option>
@@ -470,8 +485,8 @@
 
 
 						<div class="form-group">
-							<label class="control-label col-sm-2" for="brand">Brand2:</label>
-							<div class="col-sm-3">
+							<label class="control-label col-sm-4" for="brand"><font size= "4">WISH-A-BRAND:</font></label>
+							<div class="col-sm-5">
 								<select name="brand2" id="brand2" class="form-control"
 									data-live-search="false" data-live-search-style="begins"
 									title="Choose brand(s)" required>
@@ -537,7 +552,7 @@
 
 
 
-					<table border=1>
+					<table border=1 style="margin:0 auto">
 						<tbody id="tbody">
 						</tbody>
 					</table>
@@ -565,9 +580,9 @@
 
 
 
-					<div class="col-lg-6 col-md-6 col-sm-6">
+					<!-- <div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="panel panel-default"></div>
-					</div>
+					</div> -->
 
 
 

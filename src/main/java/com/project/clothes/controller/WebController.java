@@ -72,7 +72,7 @@ public class WebController {
 		List<Object[]> results = jeansRepo.findJeans(brandId, hipsMin, hipsMax, waistMin, waistMax);
 		OutputData data = new OutputData();
 		for (Object[] result : results) {
-			data.setBrand((String) result[0]);
+			//data.setBrand((String) result[0]);
 			data.setSize((String) result[1].toString());
 		}
 		Gson gson = new Gson();
@@ -96,13 +96,23 @@ public class WebController {
 			Long brandId1 = Long.parseLong(holder.get("brand"));
 			Long size = Long.parseLong(holder.get("size"));
 			// float hips = Float.valueOf(holder.get("style"));
-			Long brandId2 = Long.parseLong(holder.get("brand2"));
-
+			String brandId2 = holder.get("brand2");
+			Long longBrandId2=0L;
+			if(brandId2.equalsIgnoreCase("GAP"))
+			{
+				longBrandId2=1L;
+			}if(brandId2.equalsIgnoreCase("American Eagle"))
+			{
+				longBrandId2=2L;
+			}if(brandId2.equalsIgnoreCase("GUESS"))
+			{
+				longBrandId2=3L;
+			}
 			if (brandId1 != null && size != null && brandId2 != null) {
 				float waist = jeansRepo.findWaistbySize(brandId1, size);
 				float hips = jeansRepo.findHipbySize(brandId1, size);
 
-				results = this.findOneJeans(brandId2, hips - 0.5f, hips + 0.5f, waist - 0.5f, waist + 0.5f);
+				results = this.findOneJeans(longBrandId2, hips - 0.5f, hips + 0.5f, waist - 0.5f, waist + 0.5f);
 				System.out.println(results);
 			}
 		}

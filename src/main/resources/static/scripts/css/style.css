@@ -8,6 +8,19 @@ html * {
   -moz-osx-font-smoothing: grayscale;
 }
 
+th {
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: center;
+}
+
+body {
+	background-image: url("jeans.jpg"); 
+    background-color: #333
+}
+
+
 *, *:after, *:before {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
