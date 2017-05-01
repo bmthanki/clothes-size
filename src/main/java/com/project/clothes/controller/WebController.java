@@ -101,7 +101,7 @@ public class WebController {
 			if(brandId2.equalsIgnoreCase("GAP"))
 			{
 				longBrandId2=1L;
-			}if(brandId2.equalsIgnoreCase("American Eagle"))
+			}if(brandId2.equalsIgnoreCase("American+Eagle"))
 			{
 				longBrandId2=2L;
 			}if(brandId2.equalsIgnoreCase("GUESS"))
