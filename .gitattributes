@@ -16,4 +16,6 @@
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
 
-static/* linguist-vendored
+# Consider only java files for naming project
+* linguist-vendored
+*.java linguist-vendored=false
